@@ -1,0 +1,6 @@
+ext {
+    major = 0
+    minor = 0
+    build = 1
+    version = major + "." + minor + "." + build
+}

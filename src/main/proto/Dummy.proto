@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package dozerprotobuf;
+
+option java_package = "com.panes.dozerprotobuf";
+option java_outer_classname = "DummyProto";
+
+import "google/protobuf/timestamp.proto";
+
+message Dummy {
+
+    google.protobuf.Timestamp date = 8;
+
+}

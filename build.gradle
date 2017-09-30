@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+
+description = 'Dozer - Protobuf'
+
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.3'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.google.protobuf:protobuf-java:3.3.0"
+    compile "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+    compile "org.springframework:spring-context:4.3.8.RELEASE"
+
+    // Dozer
+    compile group: 'com.github.dozermapper', name: 'dozer-core', version: '6.1.0'
+    compile group: 'com.github.dozermapper', name: 'dozer-proto', version: '6.1.0'
+    compile group: 'com.github.dozermapper', name: 'dozer-spring', version: '6.1.0'
+
+    // Test
+    testCompile "junit:junit:4.12"
+    testCompile "org.springframework:spring-test:4.3.8.RELEASE"
+}
+
+clean {
+    delete protobuf.generatedFilesBaseDir
+}
+
+idea {
+    module {
+        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java")
+        sourceDirs += file("src/main/proto")
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.3.0"
+    }
+}
